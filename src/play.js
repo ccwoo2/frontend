@@ -1,9 +1,10 @@
 import {React, useEffect, useState} from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, redirect } from "react-router-dom";
 import {Button} from "react-bootstrap"
 
 const Play = ()=>{
 
+    
     const[num, setNum]=useState(0)
     const[allQuestions, setAllQuestions]=useState()
     const[question, setQuestion]=useState()
@@ -11,8 +12,9 @@ const Play = ()=>{
     const [answer, setAnswer] =useState()
     const [display, setDisplay]=useState("")
     const [next, setNext]=useState()
-
     
+    
+
     const getQuestions=async()=>{
         await fetch("http://localhost:3001/getQuestions")
         .then((response)=>response.json())

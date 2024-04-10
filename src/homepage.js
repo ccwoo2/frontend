@@ -1,15 +1,15 @@
 import {React} from "react";
 import {useState} from "react"
 import {Button, Form} from "react-bootstrap"
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css"
+import Dashboard from "./dashboard";
 
 
 const Homepage=()=>{
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-
+    const navigate = useNavigate()
 
       
   // Function to handle user login
@@ -23,10 +23,14 @@ const Homepage=()=>{
       });
 
       if (response.ok) {
+        console.log(response)
         alert('Logged in successfully');
+        
+        window.location.replace(response.url)
+        // window.location.replace("/dashboard")
         setUsername('');
         setPassword('');
-        window.location.replace("http://localhost:3000/dashboard")
+
 
       } else {
         alert('Login failed');
@@ -63,10 +67,8 @@ const Homepage=()=>{
                 </Form.Label>
                 <br/>
                 <Button onClick={login}>login</Button>
-                
                 <br/>
                 <br/>   
-                <NavLink to="/dashboard"><Button>Play as Guest</Button></NavLink>
                 <NavLink to="/register"><Button>Resgister</Button></NavLink>
                 
             </Form>
